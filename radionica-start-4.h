@@ -13,7 +13,7 @@ void RobotLine::radionica() {
   }
   if (lopta == false){
     if (lineAny()){
-      if (line(0) and line(8)){
+      if ((line(0) and line(8)) or (line(4) and line(8)) or (line(0) and line(4))){
         catchBall();
         lopta = true;
       }
@@ -102,25 +102,21 @@ void RobotLine::catchBall() {
 
   armCatch();             // Hvatanje loptice
   stop();
-  delayMs(50);
-
-  go(-40, -40);           // Izlazak iz zone čuvanja loptice vožnjom unazad
-  delayMs(2300);
+  delayMs(350);
+  armCarry();
+  delayMs(150);
+  go(-50, -50);           // Izlazak iz zone čuvanja loptice vožnjom unazad
+  delayMs(2500);
   stop();
   delayMs(50);
 
   go(70, -70);            // Okretanje u mjestu za 180°
-  delayMs(700);
+  delayMs(800);
   stop();
   delayMs(50);
 
   go(70, 70);             // Prelazak raskrižja
   delayMs(500);
-
-  stop();
-  delayMs(20);
-  armCarry();
-  delayMs(20);
 }
 
 
@@ -129,13 +125,13 @@ void RobotLine::catchBall() {
 */
 void RobotLine::wallFollowRightCarry() {
   // Praćenje zida s desne strane nakon hvatanja lopte
-  if (frontRight() < 300)
+  if (frontRight() < 350)
   {
     if (front() < 130) {
       go(-70, 70);        // Skretanje u lijevu stranu
       delayMs(600);
     }
-    if (frontRight() < 250) {
+    if (frontRight() < 300) {
       go(30, 70);
     }
     else
@@ -145,13 +141,13 @@ void RobotLine::wallFollowRightCarry() {
 
 void RobotLine::wallFollowLeftCarry() {
   // Praćenje zida s lijeve strane nakon hvatanja lopte
-  if (frontLeft() < 300)
+  if (frontLeft() < 350)
   {
     if (front() < 130) {
       go(-70, 70);        // Skretanje u lijevu stranu
       delayMs(600);
     }
-    if (frontLeft() < 250) {
+    if (frontLeft() < 300) {
       go(70, 30);
     }
     else
